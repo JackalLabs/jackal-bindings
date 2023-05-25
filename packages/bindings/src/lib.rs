@@ -1,14 +1,18 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
+mod msg;
+mod querier;
+mod query;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+pub use msg::JackalMsg;
+pub use querier::JackalQuerier;
+pub use query::{
+    FilesResponse, JackalQuery,
+};
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
-}
+// TO DO
+// Osmosis uses this type of 'signal' but am currently unsure of how it works 'behind the hood'
+// Will flesh out.
+
+// This is a signal, such that any contract that imports these helpers will only run on the
+// jackal blockchain
+#[no_mangle]
+extern "C" fn requires_jackal() {}
