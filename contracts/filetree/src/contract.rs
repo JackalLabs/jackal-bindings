@@ -32,16 +32,17 @@ pub fn instantiate(
 pub fn execute(
     deps: DepsMut<JackalQuery>,
     _env: Env,
-    _info: MessageInfo,
+    info: MessageInfo,
     msg: ExecuteMsg,
 ) -> Result<Response<JackalMsg>, FiletreeError> {
     match msg {
         ExecuteMsg::MakeRoot {
-            creator,
+            creator: _,
             editors,
             viewers,
             trackingnumber,
-        } => make_root(deps, creator, editors, viewers, trackingnumber)
+        // 
+        } => make_root(deps, info.sender.clone().into_string(), editors, viewers, trackingnumber)
     }
 }
 
