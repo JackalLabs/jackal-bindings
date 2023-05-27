@@ -37,26 +37,28 @@ pub fn execute(
 ) -> Result<Response<JackalMsg>, FiletreeError> {
     match msg {
         ExecuteMsg::MakeRoot {
-            creator: _,
             editors,
             viewers,
-            trackingnumber,
-        // 
+            // TO DO
+            // Use UUID library to populate trackingnumber inside make_root() so 
+            // we don't need to pass it into canined or a ts client?
+            trackingnumber,  
+        // MessageInfo.sender is the creator of the root file
         } => make_root(deps, info.sender.clone().into_string(), editors, viewers, trackingnumber)
     }
 }
 
 pub fn make_root(
     deps: DepsMut<JackalQuery>,
-    creator: String,
+    sender: String,
     editors: String,
     viewers: String,
     trackingnumber: String,
 ) -> Result<Response<JackalMsg>, FiletreeError> {
-    deps.api.addr_validate(&creator)?;
+    deps.api.addr_validate(&sender)?;
 
     // Checks and validations go here?
-    let make_root_msg = JackalMsg::make_root(creator, editors, viewers,trackingnumber );
+    let make_root_msg = JackalMsg::make_root(sender, editors, viewers,trackingnumber );
 
     let res = Response::new()
         .add_attribute("method", "make_root")
