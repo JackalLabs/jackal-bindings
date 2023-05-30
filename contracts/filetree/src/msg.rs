@@ -7,6 +7,7 @@ pub struct InstantiateMsg {}
 #[cw_serde]
 pub enum ExecuteMsg {
     MakeRoot {
+        creator: String,
         editors: String,
         viewers: String,
         trackingnumber: String,
