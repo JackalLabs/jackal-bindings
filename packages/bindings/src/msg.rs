@@ -6,7 +6,6 @@ use cosmwasm_std::{CosmosMsg, CustomMsg};
 pub enum JackalMsg {
     
     MakeRoot {
-        creator: String,
         editors: String,
         viewers: String,
         trackingnumber: String,
@@ -25,9 +24,8 @@ pub enum JackalMsg {
 
 impl JackalMsg {
 
-    pub fn make_root(creator: String, editors: String, viewers: String, trackingnumber: String) -> Self {
+    pub fn make_root(editors: String, viewers: String, trackingnumber: String) -> Self {
         JackalMsg::MakeRoot {
-            creator,
             editors,
             viewers,
             trackingnumber,

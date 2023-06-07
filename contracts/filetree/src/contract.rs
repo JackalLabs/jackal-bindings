@@ -37,7 +37,6 @@ pub fn execute(
 ) -> Result<Response<JackalMsg>, FiletreeError> {
     match msg {
         ExecuteMsg::MakeRoot {
-            creator,
             editors,
             viewers,
             // TO DO
@@ -45,7 +44,7 @@ pub fn execute(
             // we don't need to pass it into canined or a ts client?
             trackingnumber,  
         // MessageInfo.sender is the creator of the root file
-        } => make_root(deps, creator, editors, viewers, trackingnumber),
+        } => make_root(deps,info, editors, viewers, trackingnumber),
         ExecuteMsg::PostFile {
             account,
             hashparent,
@@ -55,21 +54,23 @@ pub fn execute(
             editors,
             trackingnumber,
         // MessageInfo.sender is the creator of the root file
-        } => post_file(deps, account, hashparent, hashchild, contents, viewers, editors, trackingnumber)
+        } => post_file(deps, info, account, hashparent, hashchild, contents, viewers, editors, trackingnumber)
     }
 }
 
 pub fn make_root(
     deps: DepsMut<JackalQuery>,
-    creator: String,
+    info: MessageInfo,
     editors: String,
     viewers: String,
     trackingnumber: String,
 ) -> Result<Response<JackalMsg>, FiletreeError> {
-    deps.api.addr_validate(&info.sender)?;
+    // TO DO
+    // properly validate
+    // deps.api.addr_validate(info.sender)?;
 
     // Checks and validations go here?
-    let make_root_msg = JackalMsg::make_root(creator, editors, viewers,trackingnumber );
+    let make_root_msg = JackalMsg::make_root(editors, viewers,trackingnumber );
 
     let res = Response::new()
         .add_attribute("method", "make_root")
@@ -80,6 +81,7 @@ pub fn make_root(
 
 pub fn post_file(
     deps: DepsMut<JackalQuery>,
+    info: MessageInfo,
     account: String,
     hashparent: String,
     hashchild: String,
@@ -88,14 +90,15 @@ pub fn post_file(
     editors: String,
     trackingnumber: String,
 ) -> Result<Response<JackalMsg>, FiletreeError> {
-    deps.api.addr_validate(&creator)?;
+    // TO DO
+    //deps.api.addr_validate(&nfo.sender)?;
 
     // Checks and validations go here?
     let post_file_msg = JackalMsg::post_file(
         account, hashparent, hashchild,contents, viewers, editors,trackingnumber  );
 
     let res = Response::new()
-        .add_attribute("method", "make_root")
+        .add_attribute("method", "post_file")
         .add_message(post_file_msg);
 
     Ok(res)

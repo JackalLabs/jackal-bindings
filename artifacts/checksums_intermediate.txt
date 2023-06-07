@@ -1,1 +1,1 @@
-c2bf4ba8b31182e7528f74dd0ef94f60e656680a95371488142bd87fdf990d5f  target/wasm32-unknown-unknown/release/filetree.wasm
+8f37c58ee75361014fbb9e99eed28a731dd8d4ad4599c43db9ccce63e73d8760  target/wasm32-unknown-unknown/release/filetree.wasm
