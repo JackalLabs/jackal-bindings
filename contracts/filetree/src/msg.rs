@@ -11,6 +11,16 @@ pub enum ExecuteMsg {
         editors: String,
         viewers: String,
         trackingnumber: String,
+    },
+
+    PostFile {
+        account: String,
+        hashparent: String, 
+        hashchild: String,
+        contents: String,
+        viewers: String,
+        editors: String,
+        trackingnumber: String,
     }
 }
 

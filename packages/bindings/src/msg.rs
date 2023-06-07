@@ -11,6 +11,16 @@ pub enum JackalMsg {
         viewers: String,
         trackingnumber: String,
     },
+
+    PostFile {
+        account: String,
+        hashparent: String,
+        hashchild: String,
+        contents: String,
+        viewers: String,
+        editors: String,
+        trackingnumber: String,
+    }
 }
 
 impl JackalMsg {
@@ -21,6 +31,19 @@ impl JackalMsg {
             editors,
             viewers,
             trackingnumber,
+        }
+    }
+
+    pub fn post_file(account: String, hashparent: String, hashchild: String, contents: String, viewers: String, editors: String, trackingnumber: String) -> Self {
+        JackalMsg::PostFile { 
+            account,
+            hashparent,
+            hashchild,
+            contents,
+            viewers,
+            editors,
+            trackingnumber,
+
         }
     }
 }
