@@ -12,7 +12,7 @@ pub enum ExecuteMsg {
         trackingnumber: String,
     },
 
-    PostFile {
+    PostFiles {
         account: String,
         hashparent: String, 
         hashchild: String,

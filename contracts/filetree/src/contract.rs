@@ -45,7 +45,7 @@ pub fn execute(
             trackingnumber,  
         // MessageInfo.sender is the creator of the root file
         } => make_root(deps,info, editors, viewers, trackingnumber),
-        ExecuteMsg::PostFile {
+        ExecuteMsg::PostFiles {
             account,
             hashparent,
             hashchild,
@@ -54,7 +54,7 @@ pub fn execute(
             editors,
             trackingnumber,
         // MessageInfo.sender is the creator of the root file
-        } => post_file(deps, info, account, hashparent, hashchild, contents, viewers, editors, trackingnumber)
+        } => post_files(deps, info, account, hashparent, hashchild, contents, viewers, editors, trackingnumber)
     }
 }
 
@@ -79,7 +79,7 @@ pub fn make_root(
     Ok(res)
 }
 
-pub fn post_file(
+pub fn post_files(
     deps: DepsMut<JackalQuery>,
     info: MessageInfo,
     account: String,
@@ -94,7 +94,7 @@ pub fn post_file(
     //deps.api.addr_validate(&nfo.sender)?;
 
     // Checks and validations go here?
-    let post_file_msg = JackalMsg::post_file(
+    let post_file_msg = JackalMsg::post_files(
         account, hashparent, hashchild,contents, viewers, editors,trackingnumber  );
 
     let res = Response::new()
