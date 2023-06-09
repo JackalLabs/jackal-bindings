@@ -58,7 +58,13 @@ pub fn execute(
         ExecuteMsg::DeleteFile {
             hashpath,
             account,
-        } => delete_file(deps,info, hashpath, account),
+        } => delete_file(deps, info, hashpath, account),
+        ExecuteMsg::BuyStorage {
+            foraddress,
+            duration,
+            bytes,
+            paymentdenom,
+        } => buy_storage(deps, info, foraddress, duration, bytes, paymentdenom),
     }
 }
 
@@ -124,6 +130,28 @@ pub fn delete_file(
     let res = Response::new()
         .add_attribute("method", "delete_file")
         .add_message(delete_file_msg);
+
+    Ok(res)
+}
+
+pub fn buy_storage(
+    deps: DepsMut<JackalQuery>,
+    info: MessageInfo,
+    foraddress: String,
+    duration: String,
+    bytes: String,
+    paymentdenom: String
+) -> Result<Response<JackalMsg>, FiletreeError> {
+    // TO DO
+    //deps.api.addr_validate(&nfo.sender)?;
+
+    // Checks and validations go here?
+    let buy_storage_msg = JackalMsg::buy_storage(
+        foraddress, duration, bytes, paymentdenom);
+
+    let res = Response::new()
+        .add_attribute("method", "buy_storage")
+        .add_message(buy_storage_msg);
 
     Ok(res)
 }

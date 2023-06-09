@@ -26,6 +26,13 @@ pub enum ExecuteMsg {
         hashpath: String,
         account: String,
     },
+
+    BuyStorage {
+        foraddress: String,
+        duration: String,
+        bytes: String,
+        paymentdenom: String,
+    },
 }
 
 #[cw_serde]

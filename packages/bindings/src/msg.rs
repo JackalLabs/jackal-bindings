@@ -24,6 +24,17 @@ pub enum JackalMsg {
     DeleteFile {
         hashpath: String,
         account: String,
+    },
+
+    // This is actually for the storage module, not filetree. The initial vision was for filetree and storage to each have
+    // their own 'gateway' contracts. 
+    // However, it may work out best that we call this contract 'jackal storage gateway' to serve as the gateway for both modules. 
+
+    BuyStorage {
+        foraddress: String,
+        duration: String,
+        bytes: String,
+        paymentdenom: String,
     }
 }
 
@@ -54,6 +65,15 @@ impl JackalMsg {
         JackalMsg::DeleteFile {
             hashpath,
             account,
+        }
+    }
+
+    pub fn buy_storage(foraddress: String, duration: String, bytes: String, paymentdenom: String) -> Self {
+        JackalMsg::BuyStorage {
+            foraddress,
+            duration,
+            bytes,
+            paymentdenom,
         }
     }
 }
