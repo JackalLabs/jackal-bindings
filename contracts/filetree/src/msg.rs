@@ -20,7 +20,12 @@ pub enum ExecuteMsg {
         viewers: String,
         editors: String,
         trackingnumber: String,
-    }
+    },
+
+    DeleteFile {
+        hashpath: String,
+        account: String,
+    },
 }
 
 #[cw_serde]

@@ -54,7 +54,11 @@ pub fn execute(
             editors,
             trackingnumber,
         // MessageInfo.sender is the creator of the root file
-        } => post_files(deps, info, account, hashparent, hashchild, contents, viewers, editors, trackingnumber)
+        } => post_files(deps, info, account, hashparent, hashchild, contents, viewers, editors, trackingnumber),
+        ExecuteMsg::DeleteFile {
+            hashpath,
+            account,
+        } => delete_file(deps,info, hashpath, account),
     }
 }
 
@@ -100,6 +104,26 @@ pub fn post_files(
     let res = Response::new()
         .add_attribute("method", "post_file")
         .add_message(post_file_msg);
+
+    Ok(res)
+}
+
+pub fn delete_file(
+    deps: DepsMut<JackalQuery>,
+    info: MessageInfo,
+    hashpath: String,
+    account: String,
+) -> Result<Response<JackalMsg>, FiletreeError> {
+    // TO DO
+    //deps.api.addr_validate(&nfo.sender)?;
+
+    // Checks and validations go here?
+    let delete_file_msg = JackalMsg::delete_file(
+        hashpath, account);
+
+    let res = Response::new()
+        .add_attribute("method", "delete_file")
+        .add_message(delete_file_msg);
 
     Ok(res)
 }

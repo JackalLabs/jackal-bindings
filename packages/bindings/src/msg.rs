@@ -19,6 +19,11 @@ pub enum JackalMsg {
         viewers: String,
         editors: String,
         trackingnumber: String,
+    },
+
+    DeleteFile {
+        hashpath: String,
+        account: String,
     }
 }
 
@@ -42,6 +47,13 @@ impl JackalMsg {
             editors,
             trackingnumber,
 
+        }
+    }
+
+    pub fn delete_file(hashpath: String, account: String) -> Self {
+        JackalMsg::DeleteFile {
+            hashpath,
+            account,
         }
     }
 }
