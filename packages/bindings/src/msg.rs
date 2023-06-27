@@ -4,6 +4,10 @@ use cosmwasm_std::{CosmosMsg, CustomMsg};
 // A number of Custom messages that can call into the Jackal bindings
 #[cw_serde]
 pub enum JackalMsg {
+
+    PostKey {
+        key: String,
+    },
     
     MakeRoot {
         editors: String,
@@ -39,6 +43,12 @@ pub enum JackalMsg {
 }
 
 impl JackalMsg {
+
+    pub fn post_key(key: String) -> Self {
+        JackalMsg::PostKey {
+            key,
+        }
+    }
 
     pub fn make_root(editors: String, viewers: String, trackingnumber: String) -> Self {
         JackalMsg::MakeRoot {

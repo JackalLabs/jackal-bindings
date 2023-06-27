@@ -36,6 +36,10 @@ pub fn execute(
     msg: ExecuteMsg,
 ) -> Result<Response<JackalMsg>, FiletreeError> {
     match msg {
+        ExecuteMsg::PostKey {
+            key,
+
+        } => post_key(deps,info, key),
         ExecuteMsg::MakeRoot {
             editors,
             viewers,
@@ -66,6 +70,25 @@ pub fn execute(
             paymentdenom,
         } => buy_storage(deps, info, foraddress, duration, bytes, paymentdenom),
     }
+}
+
+pub fn post_key(
+    deps: DepsMut<JackalQuery>,
+    info: MessageInfo,
+    key: String,
+) -> Result<Response<JackalMsg>, FiletreeError> {
+    // TO DO
+    // properly validate
+    // deps.api.addr_validate(info.sender)?;
+
+    // Checks and validations go here?
+    let post_key_msg = JackalMsg::post_key(key);
+
+    let res = Response::new()
+        .add_attribute("method", "post_key")
+        .add_message(post_key_msg);
+
+    Ok(res)
 }
 
 pub fn make_root(
