@@ -69,6 +69,17 @@ pub fn execute(
             bytes,
             paymentdenom,
         } => buy_storage(deps, info, foraddress, duration, bytes, paymentdenom),
+        ExecuteMsg::PostAndSign {
+            account,
+            hashparent,
+            hashchild,
+            contents,  
+            viewers,
+            editors,
+            trackingnumber,
+            cid,
+            payonce,
+        } => post_and_sign(deps, info, account, hashparent, hashchild, contents, viewers, editors, trackingnumber, cid, payonce),
     }
 }
 
@@ -175,6 +186,34 @@ pub fn buy_storage(
     let res = Response::new()
         .add_attribute("method", "buy_storage")
         .add_message(buy_storage_msg);
+
+    Ok(res)
+}
+
+
+pub fn post_and_sign(
+    deps: DepsMut<JackalQuery>,
+    info: MessageInfo,
+    account: String,
+    hashparent: String,
+    hashchild: String,
+    contents: String,
+    viewers: String,
+    editors: String,
+    trackingnumber: String,
+    cid: String,
+    payonce: bool,
+) -> Result<Response<JackalMsg>, FiletreeError> {
+    // TO DO
+    //deps.api.addr_validate(&nfo.sender)?;
+
+    // Checks and validations go here?
+    let post_and_sign_msg = JackalMsg::post_and_sign(
+        account, hashparent, hashchild,contents, viewers, editors,trackingnumber, cid, payonce );
+
+    let res = Response::new()
+        .add_attribute("method", "post_and_sign")
+        .add_message(post_and_sign_msg);
 
     Ok(res)
 }

@@ -39,7 +39,20 @@ pub enum JackalMsg {
         duration: String,
         bytes: String,
         paymentdenom: String,
-    }
+    },
+
+    // For jackaljs integration
+    PostAndSign {
+        account: String,
+        hashparent: String,
+        hashchild: String,
+        contents: String,
+        viewers: String,
+        editors: String,
+        trackingnumber: String,
+        cid: String,
+        payonce: bool,
+    },
 }
 
 impl JackalMsg {
@@ -84,6 +97,20 @@ impl JackalMsg {
             duration,
             bytes,
             paymentdenom,
+        }
+    }
+
+    pub fn post_and_sign(account: String, hashparent: String, hashchild: String, contents: String, viewers: String, editors: String, trackingnumber: String, cid: String, payonce: bool) -> Self {
+        JackalMsg::PostAndSign { 
+            account,
+            hashparent,
+            hashchild,
+            contents,
+            viewers,
+            editors,
+            trackingnumber,
+            cid,
+            payonce,
         }
     }
 }

@@ -38,6 +38,18 @@ pub enum ExecuteMsg {
         bytes: String,
         paymentdenom: String,
     },
+
+    PostAndSign {
+        account: String,
+        hashparent: String, 
+        hashchild: String,
+        contents: String,
+        viewers: String,
+        editors: String,
+        trackingnumber: String,
+        cid: String,
+        payonce: bool,
+    },
 }
 
 #[cw_serde]
