@@ -4,6 +4,10 @@ use cosmwasm_std::{CosmosMsg, CustomMsg};
 // A number of Custom messages that can call into the Jackal bindings
 #[cw_serde]
 pub enum JackalMsg {
+
+    PostKey {
+        key: String,
+    },
     
     MakeRoot {
         editors: String,
@@ -35,10 +39,29 @@ pub enum JackalMsg {
         duration: String,
         bytes: String,
         paymentdenom: String,
-    }
+    },
+
+    // For jackaljs integration
+    PostAndSign {
+        account: String,
+        hashparent: String,
+        hashchild: String,
+        contents: String,
+        viewers: String,
+        editors: String,
+        trackingnumber: String,
+        cid: String,
+        payonce: bool,
+    },
 }
 
 impl JackalMsg {
+
+    pub fn post_key(key: String) -> Self {
+        JackalMsg::PostKey {
+            key,
+        }
+    }
 
     pub fn make_root(editors: String, viewers: String, trackingnumber: String) -> Self {
         JackalMsg::MakeRoot {
@@ -74,6 +97,20 @@ impl JackalMsg {
             duration,
             bytes,
             paymentdenom,
+        }
+    }
+
+    pub fn post_and_sign(account: String, hashparent: String, hashchild: String, contents: String, viewers: String, editors: String, trackingnumber: String, cid: String, payonce: bool) -> Self {
+        JackalMsg::PostAndSign { 
+            account,
+            hashparent,
+            hashchild,
+            contents,
+            viewers,
+            editors,
+            trackingnumber,
+            cid,
+            payonce,
         }
     }
 }

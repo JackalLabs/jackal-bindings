@@ -6,6 +6,11 @@ pub struct InstantiateMsg {}
 
 #[cw_serde]
 pub enum ExecuteMsg {
+
+    PostKey {
+        key: String,
+    },
+
     MakeRoot {
         editors: String,
         viewers: String,
@@ -32,6 +37,18 @@ pub enum ExecuteMsg {
         duration: String,
         bytes: String,
         paymentdenom: String,
+    },
+
+    PostAndSign {
+        account: String,
+        hashparent: String, 
+        hashchild: String,
+        contents: String,
+        viewers: String,
+        editors: String,
+        trackingnumber: String,
+        cid: String,
+        payonce: bool,
     },
 }
 
