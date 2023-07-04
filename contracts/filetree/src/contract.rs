@@ -80,6 +80,11 @@ pub fn execute(
             cid,
             payonce,
         } => post_and_sign(deps, info, account, hashparent, hashchild, contents, viewers, editors, trackingnumber, cid, payonce),
+        ExecuteMsg::DeleteAndCancel {
+            hashpath,
+            account,
+            cids,
+        } => delete_and_cancel(deps, info, hashpath, account, cids),
     }
 }
 
@@ -214,6 +219,27 @@ pub fn post_and_sign(
     let res = Response::new()
         .add_attribute("method", "post_and_sign")
         .add_message(post_and_sign_msg);
+
+    Ok(res)
+}
+
+pub fn delete_and_cancel(
+    deps: DepsMut<JackalQuery>,
+    info: MessageInfo,
+    hashpath: String,
+    account: String,
+    cids: String,
+) -> Result<Response<JackalMsg>, FiletreeError> {
+    // TO DO
+    //deps.api.addr_validate(&nfo.sender)?;
+
+    // Checks and validations go here?
+    let delete_and_cancel_msg = JackalMsg::delete_and_cancel(
+        hashpath, account, cids);
+
+    let res = Response::new()
+        .add_attribute("method", "delete_and_cancel")
+        .add_message(delete_and_cancel_msg);
 
     Ok(res)
 }
