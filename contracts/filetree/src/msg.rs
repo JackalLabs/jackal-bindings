@@ -50,6 +50,12 @@ pub enum ExecuteMsg {
         cid: String,
         payonce: bool,
     },
+    
+    DeleteAndCancel {
+        hashpath: String,
+        account: String,
+        cids: String,
+    },
 }
 
 #[cw_serde]

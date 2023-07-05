@@ -53,6 +53,12 @@ pub enum JackalMsg {
         cid: String,
         payonce: bool,
     },
+
+    DeleteAndCancel {
+        hashpath: String,
+        account: String,
+        cids: String,
+    },
 }
 
 impl JackalMsg {
@@ -111,6 +117,14 @@ impl JackalMsg {
             trackingnumber,
             cid,
             payonce,
+        }
+    }
+
+    pub fn delete_and_cancel(hashpath: String, account: String, cids: String) -> Self {
+        JackalMsg::DeleteAndCancel {
+            hashpath,
+            account,
+            cids,
         }
     }
 }
