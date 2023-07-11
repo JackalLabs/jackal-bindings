@@ -1,1 +1,2 @@
-1dcbfaee837caa36ef0f8fa1d53ded277ecfbc8eb60007507c51198f28a32e68  target/wasm32-unknown-unknown/release/filetree.wasm
+4364055e3478d8f834008eca23fc160ee3e973c81e32f4df767a676d0e0a3d74  target/wasm32-unknown-unknown/release/filetree.wasm
+2ea8194eb00fd4b4673f4675d417a598df82fa74e0d2ba3f334af0c723732264  target/wasm32-unknown-unknown/release/storage_template.wasm
