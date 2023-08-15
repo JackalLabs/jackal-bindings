@@ -43,6 +43,7 @@ pub fn execute(
     }
 }
 
+// Call make_root in filetree contract 
 pub fn hit_file_tree_make_root(
     deps: DepsMut<JackalQuery>,
     info: MessageInfo,
